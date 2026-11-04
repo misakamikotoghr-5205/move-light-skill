@@ -23,7 +23,11 @@ python3 scripts/plan.py /absolute/path/input.json --today YYYY-MM-DD --out /abso
 The planner separates essentials and fragile items, enforces per-box volume and
 weight, identifies items needing separate handling, and gives each box a stable
 label. Its packing algorithm is a deterministic heuristic, not a claim of optimal
-bin packing. Quotes with incomplete fees remain unranked lower bounds. Review
+bin packing. When box and item measurements are available, use the schema's
+optional dimensions to catch items that have low volume but cannot fit along
+the box edges. The check permits orthogonal rotation of one item; it does not
+prove a complete multi-item 3-D layout. Missing dimensions remain unverified.
+Quotes with incomplete fees remain unranked lower bounds. Review
 stairs, access, distance, large-item handling, and quote exclusions with the user
 before treating a quote as complete.
 

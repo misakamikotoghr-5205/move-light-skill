@@ -14,11 +14,24 @@ def number(value, name, *, positive=False, integer=False):
         raise ValueError(name + ' is outside its allowed range')
     return value
 
+def dimensions(value, name):
+    if not isinstance(value, list) or len(value) != 3:
+        raise ValueError(name + ' must contain three dimensions in centimetres')
+    for side in value: number(side, name, positive=True)
+    if not math.isfinite(math.prod(value)):
+        raise ValueError(name + ' has an unrepresentable volume')
+    return value
+
+def axis_fits(item_dimensions, box_dimensions):
+    """Orthogonal rotation of one rectangular item; not a multi-item 3-D layout."""
+    return all(item_side <= box_side + 1e-9 for item_side, box_side in zip(sorted(item_dimensions), sorted(box_dimensions)))
+
 def validate(data):
     if not isinstance(data, dict): raise ValueError('input must be an object')
     date.fromisoformat(data['move_date'])
     number(data['budget_fen'], 'budget_fen', integer=True)
     for key in ('box_capacity_l', 'box_max_weight_kg'): number(data[key], key, positive=True)
+    if 'box_dimensions_cm' in data: dimensions(data['box_dimensions_cm'], 'box_dimensions_cm')
     if not isinstance(data['items'], list) or not data['items']: raise ValueError('items must be a nonempty list')
     ids, units = set(), 0
     for item in data['items']:
@@ -32,6 +45,7 @@ def validate(data):
         units += item['quantity']
         number(item['volume_l'], 'volume_l', positive=True)
         number(item['weight_kg'], 'weight_kg')
+        if 'dimensions_cm' in item: dimensions(item['dimensions_cm'], 'item dimensions_cm')
         if any(not isinstance(item.get(key), bool) for key in ('fragile', 'essential')): raise ValueError('fragile and essential must be booleans')
     if units > 1000: raise ValueError('inventory exceeds 1000 units')
     quotes = data.get('quotes', [])
@@ -51,26 +65,42 @@ def validate(data):
 def plan(data, today):
     validate(data)
     move = date.fromisoformat(data['move_date']); now = date.fromisoformat(today)
+    box_dimensions = data.get('box_dimensions_cm')
+    measured_box_l = math.prod(box_dimensions) / 1000 if box_dimensions else data['box_capacity_l']
+    effective_capacity_l = min(data['box_capacity_l'], measured_box_l)
+    box_space_l = max(data['box_capacity_l'], measured_box_l)
     expanded = []
     for item in data['items']:
         group = ('essential' if item['essential'] else 'standard') + ('-fragile' if item['fragile'] else '-regular')
+        item_dimensions = item.get('dimensions_cm')
+        packing_volume = max(item['volume_l'], math.prod(item_dimensions) / 1000 if item_dimensions else 0)
         for unit in range(1, item['quantity'] + 1):
             expanded.append({'unit_id': f"{item['id']}:{unit}", 'name': item['name'], 'group': group,
-                             'volume_l': item['volume_l'], 'weight_kg': item['weight_kg']})
-    expanded.sort(key=lambda item: (item['group'], -item['volume_l'], -item['weight_kg'], item['unit_id']))
+                             'volume_l': item['volume_l'], 'packing_volume_l': packing_volume,
+                             'dimensions_cm': list(item_dimensions) if item_dimensions else None,
+                             'axis_fit_checked': bool(box_dimensions and item_dimensions),
+                             'weight_kg': item['weight_kg']})
+    expanded.sort(key=lambda item: (item['group'], -item['packing_volume_l'], -item['weight_kg'], item['unit_id']))
     boxes, loose = [], []
     for unit in expanded:
-        if unit['volume_l'] > data['box_capacity_l'] or unit['weight_kg'] > data['box_max_weight_kg']:
-            loose.append({**unit, 'reason': 'Exceeds standard box volume or weight; quote separate handling.'}); continue
+        reasons, codes = [], []
+        if unit['axis_fit_checked'] and not axis_fits(unit['dimensions_cm'], box_dimensions):
+            codes.append('dimensions_exceed_box'); reasons.append('No orthogonal rotation fits the measured box dimensions')
+        if unit['packing_volume_l'] > effective_capacity_l:
+            codes.append('volume_exceeded'); reasons.append('Exceeds effective box volume')
+        if unit['weight_kg'] > data['box_max_weight_kg']:
+            codes.append('weight_exceeded'); reasons.append('Exceeds box weight limit')
+        if reasons:
+            loose.append({**unit, 'reason_codes': codes, 'reason': '; '.join(reasons) + '; quote separate handling.'}); continue
         box = next((box for box in boxes if box['group'] == unit['group'] and
-                    box['volume_l'] + unit['volume_l'] <= data['box_capacity_l'] + 1e-9 and
+                    box['volume_l'] + unit['packing_volume_l'] <= effective_capacity_l + 1e-9 and
                     box['weight_kg'] + unit['weight_kg'] <= data['box_max_weight_kg'] + 1e-9), None)
         if box is None:
-            box = {'id': f"BOX-{len(boxes)+1:03}", 'group': unit['group'], 'volume_l': 0, 'weight_kg': 0, 'items': []}; boxes.append(box)
-        box['items'].append(unit); box['volume_l'] += unit['volume_l']; box['weight_kg'] += unit['weight_kg']
+            box = {'id': f"BOX-{len(boxes)+1:03}", 'group': unit['group'], 'capacity_l': effective_capacity_l, 'volume_l': 0, 'weight_kg': 0, 'items': []}; boxes.append(box)
+        box['items'].append(unit); box['volume_l'] += unit['packing_volume_l']; box['weight_kg'] += unit['weight_kg']
     total_volume = sum(item['volume_l'] for item in expanded)
-    # Estimate cargo space from the outside capacity of packed boxes plus loose items.
-    cargo_volume = len(boxes) * data['box_capacity_l'] + sum(item['volume_l'] for item in loose)
+    # A volume estimate only: internal dimensions are not exterior vehicle geometry.
+    cargo_volume = len(boxes) * box_space_l + sum(item['packing_volume_l'] for item in loose)
     quotes = []
     for quote in data.get('quotes', []):
         total = quote['base_fen'] + quote['per_box_fen'] * len(boxes) + quote['extra_fees_fen']
@@ -87,6 +117,13 @@ def plan(data, today):
     return {'schema_version': 1, 'today': today, 'move_date': data['move_date'], 'move_date_in_past': move < now,
             'algorithm': 'first-fit decreasing, separated by essential and fragile flags; heuristic, not optimal',
             'total_units': len(expanded), 'total_item_volume_l': round(total_volume, 3), 'estimated_cargo_volume_l': round(cargo_volume, 3),
+            'effective_box_capacity_l': effective_capacity_l, 'estimated_box_space_l': box_space_l,
+            'geometry': {'method': 'single-item orthogonal axis-fit; no multi-item spatial layout',
+                         'box_dimensions_cm': list(box_dimensions) if box_dimensions else None,
+                         'checked_units': sum(unit['axis_fit_checked'] for unit in expanded),
+                         'unchecked_unit_ids': [unit['unit_id'] for unit in expanded if not unit['axis_fit_checked']],
+                         'rejected_unit_ids': [unit['unit_id'] for unit in loose if 'dimensions_exceed_box' in unit['reason_codes']],
+                         'layout_verified': False},
             'box_count': len(boxes), 'boxes': boxes, 'loose_items': loose, 'budget_fen': data['budget_fen'], 'quotes': quotes, 'tasks': tasks,
             'recommendation': next((quote['id'] for quote in quotes if quote['rankable']), None)}
 
@@ -95,13 +132,15 @@ def plain(value): return str(value).replace('\n', ' ').replace('\r', ' ').replac
 def render(result):
     lines = ['# 搬家不掉链 · Move Light', '', f"计划日：{result['today']} · 搬家日：{result['move_date']}", '',
              f"{result['total_units']} 件物品 · {result['box_count']} 箱 · {len(result['loose_items'])} 件需单独搬运 · 预估占用 {result['estimated_cargo_volume_l']} L", '',
-             '容量为箱子外部容量估计，未包含保护填充和车辆不规则空间。装箱采用确定性启发式，不保证最少箱数。', '', '## 日期清单', '']
+             '车辆占用是体积估计，未包含箱壁、保护填充和车辆不规则空间。装箱采用确定性启发式，不保证最少箱数或完整三维布局。', '', '## 尺寸核对', '',
+             f"可用箱容量上限：{result['effective_box_capacity_l']:.3f} L；已核对单件尺寸 {result['geometry']['checked_units']} 件，尚未核对 {len(result['geometry']['unchecked_unit_ids'])} 件。",
+             '尺寸校验只考虑单件长方体的直角旋转，不证明多件可以在同一纸箱中无碰撞摆放。缺少尺寸的物品不标为已验证。', '', '## 日期清单', '']
     if result['move_date_in_past']: lines += ['搬家日期已过，请核对日期后再用此计划。', '']
     lines += [f"- [{task['status']}] {task['date']}：{task['title']}" for task in result['tasks']]
     lines += ['', '## 箱单', '']
     for box in result['boxes']:
-        lines += [f"### {box['id']} · {box['group']}", f"{box['volume_l']:.1f} L / {box['weight_kg']:.1f} kg", '']
-        lines += [f"- {plain(item['name'])} [{plain(item['unit_id'])}]" for item in box['items']]
+        lines += [f"### {box['id']} · {box['group']}", f"占用 {box['volume_l']:.1f} / {box['capacity_l']:.1f} L · {box['weight_kg']:.1f} kg", '']
+        lines += [f"- {plain(item['name'])} [{plain(item['unit_id'])}] · {'单件边长可放入' if item['axis_fit_checked'] else '边长未核对'}" for item in box['items']]
         lines.append('')
     lines += ['## 单独搬运', ''] + ([f"- {plain(item['name'])} [{plain(item['unit_id'])}]：{item['reason']}" for item in result['loose_items']] or ['- 无'])
     lines += ['', '## 报价比较', '', f"预算：{money(result['budget_fen'])}", '', '| 报价 | 已知金额 | 预算差额 | 状态 |', '|---|---:|---:|---|']

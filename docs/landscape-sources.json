@@ -1,0 +1,44 @@
+{
+  "checked_on": "2026-11-04",
+  "reuse": "Design reference only; no compared-project source or assets copied, imported, or bundled.",
+  "sources": [
+    {
+      "repo": "google/or-tools",
+      "branch": "stable",
+      "commit": "100f66e6242ab8bf8d32feb8f3bf086db66ae2b5",
+      "commit_date": "2026-09-17T13:02:24Z",
+      "license_id": "Apache-2.0",
+      "files": [
+        {
+          "name": "README.md",
+          "url": "https://github.com/google/or-tools/blob/100f66e6242ab8bf8d32feb8f3bf086db66ae2b5/README.md",
+          "sha256": "d4bcafffc5c1e42789bcf07143240de0bcf8e13ea08fa5f220f7a967d608af8c"
+        },
+        {
+          "name": "LICENSE",
+          "url": "https://github.com/google/or-tools/blob/100f66e6242ab8bf8d32feb8f3bf086db66ae2b5/LICENSE",
+          "sha256": "cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30"
+        }
+      ]
+    },
+    {
+      "repo": "enzoruiz/3dbinpacking",
+      "branch": "master",
+      "commit": "31b9a40c78490da082bebde39a36e5327fb5191e",
+      "commit_date": "2023-04-10T15:06:25Z",
+      "license_id": "MIT",
+      "files": [
+        {
+          "name": "README.md",
+          "url": "https://github.com/enzoruiz/3dbinpacking/blob/31b9a40c78490da082bebde39a36e5327fb5191e/README.md",
+          "sha256": "98751739a763d3dd51ec45a76ab8f1883d9c83f3a2f311a16d3c358b61986caf"
+        },
+        {
+          "name": "LICENSE",
+          "url": "https://github.com/enzoruiz/3dbinpacking/blob/31b9a40c78490da082bebde39a36e5327fb5191e/LICENSE",
+          "sha256": "c09dcb6284f53b77aa7db63f0fe608a1ca719cf02dea3ae71a7dd66d015ca999"
+        }
+      ]
+    }
+  ]
+}

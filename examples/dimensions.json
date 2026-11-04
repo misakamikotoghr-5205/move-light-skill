@@ -1,0 +1,16 @@
+{
+  "move_date": "2026-11-05",
+  "budget_fen": 80000,
+  "box_capacity_l": 40,
+  "box_max_weight_kg": 15,
+  "box_dimensions_cm": [40, 30, 30],
+  "items": [
+    { "id": "poster-tube", "name": "演示画筒", "quantity": 2, "volume_l": 2, "dimensions_cm": [70, 5, 5], "weight_kg": 0.8, "fragile": false, "essential": false },
+    { "id": "keepsake", "name": "急用易碎纪念品", "quantity": 1, "volume_l": 1, "dimensions_cm": [20, 20, 20], "weight_kg": 1, "fragile": true, "essential": true },
+    { "id": "books", "name": "未测量边长的书籍", "quantity": 1, "volume_l": 6, "weight_kg": 4, "fragile": false, "essential": false }
+  ],
+  "quotes": [
+    { "id": "full", "name": "费用完整的基础报价", "base_fen": 35000, "per_box_fen": 1200, "extra_fees_fen": 5000, "fees_complete": true, "capacity_l": 400 },
+    { "id": "unknown", "name": "便宜但附加费未知", "base_fen": 18000, "per_box_fen": 800, "extra_fees_fen": 0, "fees_complete": false, "capacity_l": 1000 }
+  ]
+}

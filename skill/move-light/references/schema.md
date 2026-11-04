@@ -6,6 +6,21 @@ Each item has a unique `id`, `name`, integer `quantity` (1–100), positive
 `volume_l`, nonnegative `weight_kg`, boolean `fragile`, and boolean `essential`.
 Volume and weight are per unit, not the combined quantity. Maximum 1,000 units.
 
+Optional `box_dimensions_cm`: three positive finite **internal** box side lengths,
+in centimetres. Optional per-item `dimensions_cm`: three positive finite side
+lengths of the item's packed bounding box, per unit. Every orthogonal rotation
+is allowed; diagonal tilting and upright-only restrictions are not modeled.
+If an item cannot fit by any such rotation, it remains a separately handled item
+even when its litres and weight are small. Missing box or item dimensions are
+reported as unverified, never assumed to fit geometrically.
+
+Packing capacity uses the smaller of `box_capacity_l` and measured internal
+volume. An item's packing occupancy uses the larger of declared `volume_l` and
+its measured bounding volume; original `volume_l` is retained alongside
+`packing_volume_l`. Vehicle space remains an estimate, using the larger of nominal
+box capacity and measured box volume. No exterior clearance, cushioning, or full
+multi-item spatial placement is verified. `geometry.layout_verified` stays false.
+
 Optional `quotes`: list with unique `id`, `name`, nonnegative integer
 `base_fen`, `per_box_fen`, `extra_fees_fen`; boolean `fees_complete`; and optional
 `capacity_l` (positive number). Fee completeness is the user's assertion after
