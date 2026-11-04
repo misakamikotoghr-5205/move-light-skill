@@ -1,0 +1,13 @@
+{
+  "move_date":"2026-11-20","budget_fen":80000,"box_capacity_l":40,"box_max_weight_kg":15,
+  "items":[
+    {"id":"books","name":"书籍","quantity":4,"volume_l":10,"weight_kg":6,"fragile":false,"essential":false},
+    {"id":"cups","name":"杯碟（含保护填充）","quantity":2,"volume_l":12,"weight_kg":3,"fragile":true,"essential":false},
+    {"id":"clothes","name":"衣物","quantity":3,"volume_l":18,"weight_kg":3,"fragile":false,"essential":false},
+    {"id":"daily","name":"首日必需品","quantity":1,"volume_l":15,"weight_kg":4,"fragile":false,"essential":true}
+  ],
+  "quotes":[
+    {"id":"complete","name":"示例A：含全部附加费","base_fen":30000,"per_box_fen":1200,"extra_fees_fen":5000,"fees_complete":true,"capacity_l":1200},
+    {"id":"unknown","name":"示例B：楼层费待确认","base_fen":20000,"per_box_fen":800,"extra_fees_fen":0,"fees_complete":false,"capacity_l":1000}
+  ]
+}
