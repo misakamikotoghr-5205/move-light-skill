@@ -19,7 +19,7 @@ python3 -m unittest discover -s tests -v
 
 ## 华为 × 小红书参赛路径
 
-对应 [小红书 Skill 创新赛](https://developer.huaweicloud.com/competition/information/1300000350/introduction)。官方 [CodeArts 上传说明](https://support.huaweicloud.com/offers-codeartsagent/codeartsagent_offers_0008.html) 要求在码道 IDE/网页端创作并通过 AI 会话上传到华为云或小红书 Skill 市场。当前交付是可运行项目及通用 Skill 包，**尚未在 CodeArts/OfficeAce 实际创作验证，也未上传市场、报名或发小红书笔记**；不要将 GitHub 推送当作已完成参赛。原始公告标明提交窗口 10月29日至11月24日，最终请在报名后台核对。
+对应 [小红书 Skill 创新赛](https://developer.huaweicloud.com/competition/information/1300000350/introduction)。2026-11-06 实读官方[创作与提交说明](https://developer.huaweicloud.com/competition/information/1300000350/html3)：须实际使用 CodeArts 或 OfficeAce 至少一种，并将 Skill **同时发布到华为云和小红书两个 Skill 市场**；还需至少一条针对已发布 Skill 的小红书笔记，带指定赛事话题。当前交付是可运行项目及通用 Skill 包，**尚未在 CodeArts/OfficeAce 实际创作验证，也未上传市场、报名或发小红书笔记**；不要将 GitHub 推送当作已完成参赛。官方当前报名及作品截止为 11 月 24 日，具体时刻最终请在报名后台核对。
 
 可在 CodeArts 导入此项目，进行实际改进和演示，记录使用过程，再按官方流程上传。分享案例时使用本仓库虚构数据，避免发布住址和贵重物品清单。
 
