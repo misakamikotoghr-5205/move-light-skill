@@ -1,0 +1,176 @@
+{
+  "schema_version": 1,
+  "today": "2026-11-04",
+  "move_date": "2026-11-05",
+  "move_date_in_past": false,
+  "algorithm": "first-fit decreasing, separated by essential and fragile flags; heuristic, not optimal",
+  "total_units": 4,
+  "total_item_volume_l": 11,
+  "estimated_cargo_volume_l": 84,
+  "effective_box_capacity_l": 36.0,
+  "estimated_box_space_l": 40,
+  "geometry": {
+    "method": "single-item orthogonal axis-fit; no multi-item spatial layout",
+    "box_dimensions_cm": [
+      40,
+      30,
+      30
+    ],
+    "checked_units": 3,
+    "unchecked_unit_ids": [
+      "books:1"
+    ],
+    "rejected_unit_ids": [
+      "poster-tube:1",
+      "poster-tube:2"
+    ],
+    "layout_verified": false
+  },
+  "box_count": 2,
+  "boxes": [
+    {
+      "id": "BOX-001",
+      "group": "essential-fragile",
+      "capacity_l": 36.0,
+      "volume_l": 8.0,
+      "weight_kg": 1,
+      "items": [
+        {
+          "unit_id": "keepsake:1",
+          "name": "急用易碎纪念品",
+          "group": "essential-fragile",
+          "volume_l": 1,
+          "packing_volume_l": 8.0,
+          "dimensions_cm": [
+            20,
+            20,
+            20
+          ],
+          "axis_fit_checked": true,
+          "weight_kg": 1
+        }
+      ]
+    },
+    {
+      "id": "BOX-002",
+      "group": "standard-regular",
+      "capacity_l": 36.0,
+      "volume_l": 6,
+      "weight_kg": 4,
+      "items": [
+        {
+          "unit_id": "books:1",
+          "name": "未测量边长的书籍",
+          "group": "standard-regular",
+          "volume_l": 6,
+          "packing_volume_l": 6,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 4
+        }
+      ]
+    }
+  ],
+  "loose_items": [
+    {
+      "unit_id": "poster-tube:1",
+      "name": "演示画筒",
+      "group": "standard-regular",
+      "volume_l": 2,
+      "packing_volume_l": 2,
+      "dimensions_cm": [
+        70,
+        5,
+        5
+      ],
+      "axis_fit_checked": true,
+      "weight_kg": 0.8,
+      "reason_codes": [
+        "dimensions_exceed_box"
+      ],
+      "reason": "No orthogonal rotation fits the measured box dimensions; quote separate handling."
+    },
+    {
+      "unit_id": "poster-tube:2",
+      "name": "演示画筒",
+      "group": "standard-regular",
+      "volume_l": 2,
+      "packing_volume_l": 2,
+      "dimensions_cm": [
+        70,
+        5,
+        5
+      ],
+      "axis_fit_checked": true,
+      "weight_kg": 0.8,
+      "reason_codes": [
+        "dimensions_exceed_box"
+      ],
+      "reason": "No orthogonal rotation fits the measured box dimensions; quote separate handling."
+    }
+  ],
+  "budget_fen": 80000,
+  "quotes": [
+    {
+      "id": "unknown",
+      "name": "便宜但附加费未知",
+      "base_fen": 18000,
+      "per_box_fen": 800,
+      "extra_fees_fen": 0,
+      "fees_complete": false,
+      "capacity_l": 1000,
+      "total_fen": 19600,
+      "budget_delta_fen": 60400,
+      "transport_fits": true,
+      "rankable": false,
+      "status": "confirm_loose_item_fees"
+    },
+    {
+      "id": "full",
+      "name": "费用完整的基础报价",
+      "base_fen": 35000,
+      "per_box_fen": 1200,
+      "extra_fees_fen": 5000,
+      "fees_complete": true,
+      "capacity_l": 400,
+      "total_fen": 42400,
+      "budget_delta_fen": 37600,
+      "transport_fits": true,
+      "rankable": false,
+      "status": "confirm_loose_item_fees"
+    }
+  ],
+  "tasks": [
+    {
+      "date": "2026-10-22",
+      "title": "核对清单、筛选搬运报价并确认附加费",
+      "status": "overdue"
+    },
+    {
+      "date": "2026-10-29",
+      "title": "打包低频物品，逐箱贴上箱号",
+      "status": "overdue"
+    },
+    {
+      "date": "2026-11-02",
+      "title": "确认到达时段、电梯和搬运通道",
+      "status": "overdue"
+    },
+    {
+      "date": "2026-11-04",
+      "title": "单独准备必需品包，拍照留存箱单",
+      "status": "today"
+    },
+    {
+      "date": "2026-11-05",
+      "title": "按箱号清点装卸，核对物品和最终费用",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-11-06",
+      "title": "先拆必需品，再按箱单逐一核对",
+      "status": "upcoming"
+    }
+  ],
+  "recommendation": null
+}

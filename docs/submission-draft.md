@@ -36,3 +36,5 @@ Prepared 2026-11-06. 未报名、未上传市场；此文件可用于正式表�
 Repository: https://github.com/misakamikotoghr-5205/move-light-skill
 
 License: MIT.
+
+本轮只补缺少的实际运行附件和发布执行稿：见[中文录屏/上传清单](submission/guide-zh.md)、[离线证据](submission/offline-demo-20261106.json)、[家庭箱单](submission/family-plan.md)与[尺寸例外报告](submission/dimensions-plan.md)。现有作品简介与 Skill 包不重复另做；CodeArts/OfficeAce、双市场、笔记和报名仍未完成。

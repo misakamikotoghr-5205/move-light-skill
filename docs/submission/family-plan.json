@@ -1,0 +1,244 @@
+{
+  "schema_version": 1,
+  "today": "2026-11-06",
+  "move_date": "2026-11-20",
+  "move_date_in_past": false,
+  "algorithm": "first-fit decreasing, separated by essential and fragile flags; heuristic, not optimal",
+  "total_units": 10,
+  "total_item_volume_l": 133,
+  "estimated_cargo_volume_l": 200,
+  "effective_box_capacity_l": 40,
+  "estimated_box_space_l": 40,
+  "geometry": {
+    "method": "single-item orthogonal axis-fit; no multi-item spatial layout",
+    "box_dimensions_cm": null,
+    "checked_units": 0,
+    "unchecked_unit_ids": [
+      "daily:1",
+      "cups:1",
+      "cups:2",
+      "clothes:1",
+      "clothes:2",
+      "clothes:3",
+      "books:1",
+      "books:2",
+      "books:3",
+      "books:4"
+    ],
+    "rejected_unit_ids": [],
+    "layout_verified": false
+  },
+  "box_count": 5,
+  "boxes": [
+    {
+      "id": "BOX-001",
+      "group": "essential-regular",
+      "capacity_l": 40,
+      "volume_l": 15,
+      "weight_kg": 4,
+      "items": [
+        {
+          "unit_id": "daily:1",
+          "name": "首日必需品",
+          "group": "essential-regular",
+          "volume_l": 15,
+          "packing_volume_l": 15,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 4
+        }
+      ]
+    },
+    {
+      "id": "BOX-002",
+      "group": "standard-fragile",
+      "capacity_l": 40,
+      "volume_l": 24,
+      "weight_kg": 6,
+      "items": [
+        {
+          "unit_id": "cups:1",
+          "name": "杯碟（含保护填充）",
+          "group": "standard-fragile",
+          "volume_l": 12,
+          "packing_volume_l": 12,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 3
+        },
+        {
+          "unit_id": "cups:2",
+          "name": "杯碟（含保护填充）",
+          "group": "standard-fragile",
+          "volume_l": 12,
+          "packing_volume_l": 12,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 3
+        }
+      ]
+    },
+    {
+      "id": "BOX-003",
+      "group": "standard-regular",
+      "capacity_l": 40,
+      "volume_l": 36,
+      "weight_kg": 6,
+      "items": [
+        {
+          "unit_id": "clothes:1",
+          "name": "衣物",
+          "group": "standard-regular",
+          "volume_l": 18,
+          "packing_volume_l": 18,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 3
+        },
+        {
+          "unit_id": "clothes:2",
+          "name": "衣物",
+          "group": "standard-regular",
+          "volume_l": 18,
+          "packing_volume_l": 18,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 3
+        }
+      ]
+    },
+    {
+      "id": "BOX-004",
+      "group": "standard-regular",
+      "capacity_l": 40,
+      "volume_l": 38,
+      "weight_kg": 15,
+      "items": [
+        {
+          "unit_id": "clothes:3",
+          "name": "衣物",
+          "group": "standard-regular",
+          "volume_l": 18,
+          "packing_volume_l": 18,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 3
+        },
+        {
+          "unit_id": "books:1",
+          "name": "书籍",
+          "group": "standard-regular",
+          "volume_l": 10,
+          "packing_volume_l": 10,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 6
+        },
+        {
+          "unit_id": "books:2",
+          "name": "书籍",
+          "group": "standard-regular",
+          "volume_l": 10,
+          "packing_volume_l": 10,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 6
+        }
+      ]
+    },
+    {
+      "id": "BOX-005",
+      "group": "standard-regular",
+      "capacity_l": 40,
+      "volume_l": 20,
+      "weight_kg": 12,
+      "items": [
+        {
+          "unit_id": "books:3",
+          "name": "书籍",
+          "group": "standard-regular",
+          "volume_l": 10,
+          "packing_volume_l": 10,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 6
+        },
+        {
+          "unit_id": "books:4",
+          "name": "书籍",
+          "group": "standard-regular",
+          "volume_l": 10,
+          "packing_volume_l": 10,
+          "dimensions_cm": null,
+          "axis_fit_checked": false,
+          "weight_kg": 6
+        }
+      ]
+    }
+  ],
+  "loose_items": [],
+  "budget_fen": 80000,
+  "quotes": [
+    {
+      "id": "complete",
+      "name": "示例A：含全部附加费",
+      "base_fen": 30000,
+      "per_box_fen": 1200,
+      "extra_fees_fen": 5000,
+      "fees_complete": true,
+      "capacity_l": 1200,
+      "total_fen": 41000,
+      "budget_delta_fen": 39000,
+      "transport_fits": true,
+      "rankable": true,
+      "status": "comparable"
+    },
+    {
+      "id": "unknown",
+      "name": "示例B：楼层费待确认",
+      "base_fen": 20000,
+      "per_box_fen": 800,
+      "extra_fees_fen": 0,
+      "fees_complete": false,
+      "capacity_l": 1000,
+      "total_fen": 24000,
+      "budget_delta_fen": 56000,
+      "transport_fits": true,
+      "rankable": false,
+      "status": "incomplete_fees"
+    }
+  ],
+  "tasks": [
+    {
+      "date": "2026-11-06",
+      "title": "核对清单、筛选搬运报价并确认附加费",
+      "status": "today"
+    },
+    {
+      "date": "2026-11-13",
+      "title": "打包低频物品，逐箱贴上箱号",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-11-17",
+      "title": "确认到达时段、电梯和搬运通道",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-11-19",
+      "title": "单独准备必需品包，拍照留存箱单",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-11-20",
+      "title": "按箱号清点装卸，核对物品和最终费用",
+      "status": "upcoming"
+    },
+    {
+      "date": "2026-11-21",
+      "title": "先拆必需品，再按箱单逐一核对",
+      "status": "upcoming"
+    }
+  ],
+  "recommendation": "complete"
+}
