@@ -24,3 +24,9 @@ python3 -m unittest discover -s tests -v
 可在 CodeArts 导入此项目，进行实际改进和演示，记录使用过程，再按官方流程上传。分享案例时使用本仓库虚构数据，避免发布住址和贵重物品清单。
 
 MIT License. Six-project development was coordinated across a Codex agent team; all calculations can be reproduced locally.
+
+## Local demonstration, November 10
+
+## 本地Skill演示
+
+[120秒双语静音演示](docs/media/move-light-local-demo.mp4)基于两次真实CLI运行的虚构样例，展示家庭箱单、单件尺寸例外、逾期任务及缺项报价；[证据记录](docs/evidence/local-demo-20261110.json)保存输出指纹和实际成片帧。运行日为11月10日，计划日有意固定为11月6日和11月4日。画面是明确标注的结果图解，不是连续终端录屏；不声称装箱最优、完整三维可行、真实报价或车辆容量已验证，也不代表CodeArts/OfficeAce使用、市场上架、预订或付款。原创代码MIT，Codex辅助开发；不含真实住址或个人清单。

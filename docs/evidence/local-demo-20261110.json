@@ -1,0 +1,151 @@
+{
+  "schema": "local-prepared-demo/v1",
+  "project": "move-light-skill",
+  "prepared_on": "2026-11-10",
+  "source_head_at_local_run": "91fa3d3f155a916270d68b5242b6e26ad9c84f3c",
+  "scope": "Prepared local demonstration material. No new official registration, submission, deployment or review receipt is established by this file.",
+  "video": {
+    "file": "docs/media/move-light-local-demo.mp4",
+    "sha256": "d414e4eccf60e43c3850daa11a5ed771dec7b7f986a354e34071a8abb1406c35",
+    "bytes": 786255,
+    "duration_seconds": 120.0,
+    "width": 1920,
+    "height": 1080,
+    "frames_per_second": 5,
+    "codec": "H.264",
+    "pixel_format": "yuv420p",
+    "audio_streams": 0,
+    "captions": "Permanent Chinese and English text; silent"
+  },
+  "presentation": "Edited actual screenshots or actual-result evidence diagrams; not continuous screen recording",
+  "actual_decoded_sample_frames": [
+    {
+      "file": "docs/media/actual-mp4-frame-030s.png",
+      "sha256": "703ece535128e303287bf86bb03b0285d554f6e306e4d34d87f9940f50c5741e",
+      "width": 1920,
+      "height": 1080,
+      "sample_time_seconds": 30.0,
+      "decoded_frame_number": 150,
+      "origin": "Decoded from the actual final MP4; not a source card or reconstructed screenshot",
+      "scene": 2,
+      "scene_description": "Family fixture: ten units, five boxes, no loose units; dimensions are not measured."
+    },
+    {
+      "file": "docs/media/actual-mp4-frame-050s.png",
+      "sha256": "d3deb77bfa4985e6627fb4c51a83730b1900af8f3573b99190a5cc39d11e424d",
+      "width": 1920,
+      "height": 1080,
+      "sample_time_seconds": 50.0,
+      "decoded_frame_number": 250,
+      "origin": "Decoded from the actual final MP4; not a source card or reconstructed screenshot",
+      "scene": 3,
+      "scene_description": "Two long tubes remain loose; one item has unmeasured dimensions. Single-item axis-fit only."
+    }
+  ],
+  "validation": {
+    "ffprobe_verified": true,
+    "full_decode_exit_code": 0,
+    "full_decode_errors": 0,
+    "scene_midpoints_decoded_and_visually_reviewed": 6,
+    "all_original_scene_cards_and_actual_decoded_midpoints_reviewed": true,
+    "all_decoded_midpoints_match_expected_card_with_mean_absolute_pixel_error_below": 8,
+    "contains_private_paths_contacts_or_account_screenshots": false
+  },
+  "actual_local_commands": [
+    {
+      "run": "move-family",
+      "working_directory": "repository root",
+      "command_argv": [
+        "python3",
+        "skill/move-light/scripts/plan.py",
+        "examples/family.json",
+        "--today",
+        "2026-11-06",
+        "--out",
+        "{OUTPUT_ROOT}/move-family"
+      ],
+      "output_destination_redacted": true,
+      "redaction_note": "Actual private output path replaced by {OUTPUT_ROOT}; other arguments and exit code unchanged.",
+      "exit_code": 0
+    },
+    {
+      "run": "move-dimensions",
+      "working_directory": "repository root",
+      "command_argv": [
+        "python3",
+        "skill/move-light/scripts/plan.py",
+        "examples/dimensions.json",
+        "--today",
+        "2026-11-04",
+        "--out",
+        "{OUTPUT_ROOT}/move-dimensions"
+      ],
+      "output_destination_redacted": true,
+      "redaction_note": "Actual private output path replaced by {OUTPUT_ROOT}; other arguments and exit code unchanged.",
+      "exit_code": 0
+    }
+  ],
+  "actual_local_output_fingerprints": [
+    {
+      "example": "examples/family.json",
+      "output_kind": "move-plan.json",
+      "sha256": "f23707a15c3f8deb55b931d1e93efe7795def5a2a8652b33053e8b1a1945fe41",
+      "parsed_equal_existing_report": true
+    },
+    {
+      "example": "examples/dimensions.json",
+      "output_kind": "move-plan.json",
+      "sha256": "a0ea38bcb6febaf05e8cfae50184c510443bffdf42544983acd046e7a1863cd6",
+      "parsed_equal_existing_report": true
+    }
+  ],
+  "claims": {
+    "actual_local_cli_rerun_date": "2026-11-10",
+    "fictional_inputs_only": true,
+    "fixed_planning_dates": [
+      "2026-11-06",
+      "2026-11-04"
+    ],
+    "family": {
+      "units": 10,
+      "boxes": 5,
+      "loose_units": 0,
+      "dimension_checked_units": 0,
+      "complete_quote_fen": 41000,
+      "excluded_incomplete_quote_known_subtotal_fen": 24000
+    },
+    "dimensions": {
+      "units": 4,
+      "boxes": 2,
+      "loose_units": 2,
+      "dimension_checked_units": 3,
+      "unchecked_units": 1,
+      "overdue_tasks": 3,
+      "quote_recommended": false
+    },
+    "algorithm": "deterministic first-fit-decreasing heuristic with single-item orthogonal axis-fit",
+    "optimal_or_full_3d_layout_claimed": false,
+    "codearts_or_officeace_use_claimed": false,
+    "market_listing_claimed": false,
+    "booking_or_payment_performed": false
+  },
+  "limitations": [
+    "Actual local CLI reruns on fictional fixtures with fixed planning dates 2026-11-06 and 2026-11-04.",
+    "No CodeArts/OfficeAce use, market publication, booking/payment, true vehicle fit, optimal packing or complete multi-item 3D-layout claim.",
+    "Edited result diagrams, not continuous terminal recording."
+  ],
+  "media_attribution": {
+    "editorial_design": "Original Pillow shapes and text generated for this video",
+    "font": "System Noto Sans CJK (SIL Open Font License 1.1); no font binary redistributed",
+    "music": "none",
+    "voice": "none",
+    "third_party_logos": "none",
+    "AI_assistance": "Codex-assisted scripts, captions and design; runtime claims follow scene labels"
+  },
+  "main_operator_review": {
+    "actual_contact_sheet_reviewed": true,
+    "full_size_actual_frame_reviewed": 4,
+    "privacy_and_legibility_passed": true
+  },
+  "contest_platform_submission_verified_by_video": false
+}
